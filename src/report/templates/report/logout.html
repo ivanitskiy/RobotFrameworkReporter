@@ -1,0 +1,20 @@
+{% extends 'report/base.html' %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="jumbotron">
+            <h1>Logged out</h1>
+            <p>See you soon...</p>
+        </div>
+    </div>
+</div>
+
+<script>
+{% if not user.is_authenticated %}
+$("ul.nav.navbar-nav.navbar-right").css("display","none");
+{% endif %}
+</script>
+
+{% endblock %}

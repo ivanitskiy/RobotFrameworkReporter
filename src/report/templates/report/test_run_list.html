@@ -1,0 +1,41 @@
+{% extends 'report/base.html' %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="row">
+            <div class="jumbotron">
+                <h2>Test Runs</h2>
+                <table class="table table-condensed ">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Passed</th>
+                            <th>Failed</th>
+                            <th>Details</th>
+                            <th>Logs</th>
+                            <th>Submitted By</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for test_status in object_list %}
+                            <tr>
+                                <td>{{ test_status.test_run.finished_at }}</td>
+                                <td>{{ test_status.passed }}</td>
+                                <td>{{ test_status.failed }}</td>
+                                <td>
+                                    <a href="{{ test_status.test_run.report_file.url }}">report</a>
+                                </td>
+                                <td>
+                                    <a href="{{ test_status.test_run.log_file.url }}">log</a>
+                                </td>
+                                <td>{{ test_status.test_run.submitted_by }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

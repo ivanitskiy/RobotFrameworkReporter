@@ -1,0 +1,34 @@
+version: '2'  
+services:  
+  nginx:
+    image: nginx:latest
+    container_name: ng01
+    ports:
+      - "8008:8008"
+    volumes:
+      - ./src:/src
+      - ./media:/www/media
+      - ./static:/www/static
+      - ./config/nginx:/etc/nginx/conf.d
+    depends_on:
+      - web
+  web:
+    environment:
+      - DEBUG=1
+      - DJANGO_SETTINGS_MODULE=rfsite.settings_docker
+    build: .
+    container_name: dg01
+    command: bash -c "python manage.py makemigrations && python manage.py migrate && gunicorn mydjango.wsgi -b 0.0.0.0:8000"
+    depends_on:
+      - db
+    volumes:
+      - ./src:/sr
+      - ./media:/www/media
+      - ./static:/www/static
+    expose:
+      - "8000"
+
+  db:
+    image: postgres:latest
+    container_name: ps01
+

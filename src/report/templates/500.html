@@ -1,0 +1,15 @@
+{% extends 'report/base.html' %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="error">
+            <h1>Sorry, but the requested page is unavailable due to a server error</h1>
+            <p>Our engineers have been notified, so check back later</p>
+            <b>{{ exception_value }}{{value}}</b>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
